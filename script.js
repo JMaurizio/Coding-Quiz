@@ -29,6 +29,9 @@ var qn = [
 var start = document.querySelector("#start-btn")
 var timeLeft = document.querySelector("#timer")
 var seconds = 75
+var container = document.querySelector("#questions-container")
+var options = document.querySelector("#options")
+var li = document.createElement("li")
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -42,4 +45,20 @@ start.addEventListener("click", function() {
             }
         }, 1000);
     };
+    startQuiz()
 });
+
+function startQuiz() {
+    for (var i=0; i<qn.length; i++) {
+        var quest = qn[i].question
+        var choices = qn[i].answers
+        var li = document.createElement("li")
+        container.textContent = quest
+        options.append(li)
+        li.textContent = choices
+    }
+};
+
+function checkAnswer() {
+
+};
