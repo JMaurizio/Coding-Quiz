@@ -26,12 +26,13 @@ var qn = [
     }
 ];
 
+var qnArray = 0
 var start = document.querySelector("#start-btn")
 var timeLeft = document.querySelector("#timer")
 var seconds = 75
 var container = document.querySelector("#questions-container")
 var options = document.querySelector("#options")
-var li = document.createElement("li")
+var rightWrong = document.querySelector("#check-answer")
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -50,15 +51,23 @@ start.addEventListener("click", function() {
 
 function startQuiz() {
     for (var i=0; i<qn.length; i++) {
-        var quest = qn[i].question
-        var choices = qn[i].answers
+        var quest = qn[qnArray].question
+        var choices = qn[qnArray].answers
         var li = document.createElement("li")
         container.textContent = quest
-        options.append(li)
+        container.append(li)
         li.textContent = choices
+        li.addEventListener("click", (checkAnswer));
     }
 };
 
-function checkAnswer() {
-
+function checkAnswer(event) {
+    var element = event.target;
+    var right = qn[qnArray].correct
+    if(element.textContent == right ) {
+        rightWrong.textContent = "Correct!"
+    }
+    else {
+        rightWrong.textContent = "Wrong!"
+    }
 };
