@@ -35,10 +35,10 @@ var options = document.querySelector("#options")
 var rightWrong = document.querySelector("#check-answer")
 var quest = qn[qnArray].question
 var choices = qn[qnArray].answers
-var li = document.createElement("li")
-var li2 = document.createElement("li")
-var li3 = document.createElement("li")
-var li4 = document.createElement("li")
+var li = document.createElement("button")
+var li2 = document.createElement("button")
+var li3 = document.createElement("button")
+var li4 = document.createElement("button")
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -63,11 +63,16 @@ function startQuiz() {
         li2.textContent = choices[1]
         li3.textContent = choices[2]
         li4.textContent = choices[3]
+        li.setAttribute("class", "listitem")
+        li2.setAttribute("class", "listitem")
+        li3.setAttribute("class", "listitem")
+        li4.setAttribute("class", "listitem")
+        li.onclick = checkAnswer
+        li2.onclick = checkAnswer
+        li3.onclick = checkAnswer
+        li4.onclick = checkAnswer
     }
-    li.addEventListener("click", (checkAnswer));
-    li2.addEventListener("click", (checkAnswer));
-    li3.addEventListener("click", (checkAnswer));
-    li4.addEventListener("click", (checkAnswer));
+    
 };
 
 function checkAnswer(event) {
