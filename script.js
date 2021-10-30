@@ -33,6 +33,12 @@ var seconds = 75
 var container = document.querySelector("#questions-container")
 var options = document.querySelector("#options")
 var rightWrong = document.querySelector("#check-answer")
+var quest = qn[qnArray].question
+var choices = qn[qnArray].answers
+var li = document.createElement("li")
+var li2 = document.createElement("li")
+var li3 = document.createElement("li")
+var li4 = document.createElement("li")
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -51,20 +57,23 @@ start.addEventListener("click", function() {
 
 function startQuiz() {
     for (var i=0; i<qn.length; i++) {
-        var quest = qn[qnArray].question
-        var choices = qn[qnArray].answers
-        var li = document.createElement("li")
         container.textContent = quest
-        container.append(li)
-        li.textContent = choices
-        li.addEventListener("click", (checkAnswer));
+        container.append(li,li2,li3,li4)
+        li.textContent = choices[0]
+        li2.textContent = choices[1]
+        li3.textContent = choices[2]
+        li4.textContent = choices[3]
     }
+    li.addEventListener("click", (checkAnswer));
+    li2.addEventListener("click", (checkAnswer));
+    li3.addEventListener("click", (checkAnswer));
+    li4.addEventListener("click", (checkAnswer));
 };
 
 function checkAnswer(event) {
     var element = event.target;
     var right = qn[qnArray].correct
-    if(element.textContent == right ) {
+    if(element.textContent === right ) {
         rightWrong.textContent = "Correct!"
     }
     else {
