@@ -56,6 +56,7 @@ start.addEventListener("click", function() {
 });
 
 function startQuiz() {
+    container.innerHTML = "";
     for (var i=0; i<qn.length; i++) {
         container.textContent = quest
         container.append(li,li2,li3,li4)
@@ -78,10 +79,14 @@ function startQuiz() {
 function checkAnswer(event) {
     var element = event.target;
     var right = qn[qnArray].correct
-    if(element.textContent === right ) {
+    if(element.textContent == right ) {
         rightWrong.textContent = "Correct!"
     }
     else {
+        seconds = seconds - 10;
         rightWrong.textContent = "Wrong!"
+        startQuiz()        
     }
+
 };
+
