@@ -36,6 +36,10 @@ var li = document.createElement("button")
 var li2 = document.createElement("button")
 var li3 = document.createElement("button")
 var li4 = document.createElement("button")
+var viewScores = document.querySelector("#leaderboard")
+var scoreList = document.querySelector("#highscores")
+var scoreContainer = document.querySelector("#score-container")
+var h1 = document.createElement("h1")
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -46,6 +50,9 @@ start.addEventListener("click", function() {
             if(seconds <= 0) {
                 clearInterval(timeLeft);
                 timeLeft.textContent = "Out of time!";
+                container.innerHTML = ""
+                container.appendChild(h1)
+                h1.textContent = "GAME OVER!"
             }
         }, 1000);
     };
@@ -99,7 +106,6 @@ function checkAnswer(event) {
 
 function endQuiz() {
     container.innerHTML = "";
-    var h1 = document.createElement("h1");
     var p = document.createElement("p");
     var label = document.createElement("label");
     var input = document.createElement("input");
@@ -118,4 +124,28 @@ function endQuiz() {
     label.textContent = "Your initials:";
     input.textContent = "";
     submitBtn.textContent = "Submit your score!";
+
+    var name = document.querySelector("#initials")
+    submitBtn.addEventListener("click", function(event){
+    event.preventdefault
+        if (name === "") {
+            console.log("no name entered")
+        }
+        else {
+            var submitedScore = {
+            initials: name.value,
+            score: seconds.value
+            };
+            console.log(submitedScore)
+            localStorage.setItem("submitedScore", JSON.stringify(submitedScore));
+        };
+    });
 }
+
+viewScores.addEventListener("click", function(){
+    console.log("clicked")
+    container.innerHTML = ""
+    scoreContainer.appendChild(h1)
+    h1.textContent = "Leaderboard"
+
+});
