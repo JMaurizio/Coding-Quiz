@@ -96,3 +96,26 @@ function checkAnswer(event) {
     }
 
 };
+
+function endQuiz() {
+    container.innerHTML = "";
+    var h1 = document.createElement("h1");
+    var p = document.createElement("p");
+    var label = document.createElement("label");
+    var input = document.createElement("input");
+    var submitBtn = document.createElement("button");
+
+    h1.setAttribute("id", "endh1");
+    p.setAttribute("id", "endp");
+    label.setAttribute("id", "initials-text");
+    input.setAttribute("id", "initials");
+    submitBtn.setAttribute("id","submit");
+
+    container.append(h1,p,label,input,submitBtn);
+
+    h1.textContent = "Finished!";
+    p.textContent = "Your final score is:" + seconds;
+    label.textContent = "Your initials:";
+    input.textContent = "";
+    submitBtn.textContent = "Submit your score!";
+}
