@@ -26,15 +26,12 @@ var qn = [
     }
 ];
 
-var qnArray = 0
+let qnArray = 0
 var start = document.querySelector("#start-btn")
 var timeLeft = document.querySelector("#timer")
 var seconds = 75
 var container = document.querySelector("#questions-container")
-var options = document.querySelector("#options")
 var rightWrong = document.querySelector("#check-answer")
-var quest = qn[qnArray].question
-var choices = qn[qnArray].answers
 var li = document.createElement("button")
 var li2 = document.createElement("button")
 var li3 = document.createElement("button")
@@ -56,8 +53,9 @@ start.addEventListener("click", function() {
 });
 
 function startQuiz() {
-    container.innerHTML = "";
-    for (var i=0; i<qn.length; i++) {
+    for (var i=0; i<qn.length; i++ ) {
+        var quest = qn[qnArray].question
+        var choices = qn[qnArray].answers
         container.textContent = quest
         container.append(li,li2,li3,li4)
         li.textContent = choices[0]
@@ -73,20 +71,28 @@ function startQuiz() {
         li3.onclick = checkAnswer
         li4.onclick = checkAnswer
     }
-    
 };
 
 function checkAnswer(event) {
     var element = event.target;
     var right = qn[qnArray].correct
     if(element.textContent == right ) {
+        seconds = seconds + 10;
         rightWrong.textContent = "Correct!"
     }
     else {
         seconds = seconds - 10;
-        rightWrong.textContent = "Wrong!"
-        startQuiz()        
+        rightWrong.textContent = "Wrong!"     
+    }
+
+    qnArray++;
+
+    if(qnArray >=qn.length) {
+        endQuiz()
+    }
+    else {
+        startQuiz()
+        rightWrong.textContent = ""
     }
 
 };
-
