@@ -40,6 +40,8 @@ var viewScores = document.querySelector("#leaderboard")
 var scoreList = document.querySelector("#highscores")
 var scoreContainer = document.querySelector("#score-container")
 var h1 = document.createElement("h1")
+var storeScores = [];
+var storeScoresIndex = 0
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -127,18 +129,17 @@ function endQuiz() {
 
     var name = document.querySelector("#initials")
     submitBtn.addEventListener("click", function(event){
-    event.preventdefault
-        if (name === "") {
-            console.log("no name entered")
-        }
-        else {
-            var submitedScore = {
-            initials: name.value,
-            score: seconds.value
-            };
-            console.log(submitedScore)
-            localStorage.setItem("submitedScore", JSON.stringify(submitedScore));
+        event.preventdefault
+
+        var submitedScore = {
+        initials: name.value,
+        score: seconds.value
         };
+        
+        console.log(submitedScore)
+        localStorage.setItem("submitedScore", JSON.stringify(submitedScore));
+        storeScores.push(submitedScore);
+        localStorage.setItem("storeScores", JSON.stringify(storeScores));
     });
 }
 
@@ -147,5 +148,13 @@ viewScores.addEventListener("click", function(){
     container.innerHTML = ""
     scoreContainer.appendChild(h1)
     h1.textContent = "Leaderboard"
-
+    var listItem = document.createElement("li")
+    storeScores = localStorage.getItem("storeScores")
+    for(var i = 0;i < storeScores.length; i++) {
+        scoreList.appendChild(listItem);
+        listItem.setAttribute("class", "score")
+        listItem.textContent = storeScores[storeScoresIndex];
+    }
+    storeScores = JSON.parse(storeScores);
+    storeScoresIndex++
 });
