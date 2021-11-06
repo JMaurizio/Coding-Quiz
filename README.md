@@ -13,4 +13,8 @@ Below are screenshots of the current state fo the application as well as a githu
  https://jmaurizio.github.io/Coding-Quiz/
 
 
- ![screenshot1](./assets/images/Coding Quiz Screenshot.png)
+ ![screenshot1](./assets/images/Coding%20Quiz%20Screenshot.png)
+ ![screenshot2](./assets/images/Coding%20Quiz%20Screenshot%202.png)
+ ![screenshot3](./assets/images/Coding%20Quiz%20Screenshot%203.png)
+ ![screenshot4](./assets/images/Coding%20Quiz%20Screenshot%204.png)
+ ![screenshot5](./assets/images/Coding%20Quiz%20Screenshot%205.png)
