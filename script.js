@@ -43,6 +43,7 @@ var h1 = document.createElement("h1")
 var storeScores = [];
 var storeScoresIndex = 0
 
+
 start.addEventListener("click", function() {
     if(seconds === 75) {
         setInterval(function() {
@@ -117,7 +118,7 @@ function endQuiz() {
     p.setAttribute("id", "endp");
     label.setAttribute("id", "initials-text");
     input.setAttribute("id", "initials");
-    submitBtn.setAttribute("id","submit");
+    submitBtn.setAttribute("id","submit-btn");
 
     container.append(h1,p,label,input,submitBtn);
 
@@ -146,7 +147,7 @@ function endQuiz() {
 viewScores.addEventListener("click", function(){
     console.log("clicked")
     container.innerHTML = ""
-    scoreContainer.appendChild(h1)
+    scoreContainer.prepend(h1)
     h1.textContent = "Leaderboard"
     var listItem = document.createElement("li")
     storeScores = localStorage.getItem("storeScores")
