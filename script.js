@@ -15,7 +15,7 @@ var qn = [
     correct:"all of the above"
     },
     {
-    question: "String values must be enclosed within ________ whe being assigned to variables.",
+    question: "String values must be enclosed within ________ when being assigned to variables.",
     answers:["commas","curly brackets", "quotes","parenthesis"],
     correct:"quotes"
     },
@@ -40,9 +40,15 @@ var viewScores = document.querySelector("#leaderboard")
 var scoreList = document.querySelector("#highscores")
 var scoreContainer = document.querySelector("#score-container")
 var h1 = document.createElement("h1")
-var storeScores = [];
-var storeScoresIndex = 0
+var previousScores = localStorage.getItem("storeScores")
 
+if (previousScores) {
+    var storeScores = []
+    storeScores.push(previousScores)
+}
+else {
+var storeScores = [];
+}
 
 start.addEventListener("click", function() {
     if(seconds === 75) {
@@ -86,7 +92,7 @@ function startQuiz() {
 function checkAnswer(event) {
     var element = event.target;
     var right = qn[qnArray].correct
-    if(element.textContent == right ) {
+    if(element.textContent === right ) {
         seconds = seconds + 10;
         rightWrong.textContent = "Correct!"
     }
@@ -99,10 +105,10 @@ function checkAnswer(event) {
 
     if(qnArray >=qn.length) {
         endQuiz()
+        rightWrong.textContent = ""
     }
     else {
         startQuiz()
-        rightWrong.textContent = ""
     }
 
 };
@@ -128,16 +134,16 @@ function endQuiz() {
     input.textContent = "";
     submitBtn.textContent = "Submit your score!";
 
+
     var name = document.querySelector("#initials")
     submitBtn.addEventListener("click", function(event){
         event.preventdefault
-
+        
         var submitedScore = {
         initials: name.value,
-        score: seconds.value
+        score: seconds
         };
         
-        console.log(submitedScore)
         localStorage.setItem("submitedScore", JSON.stringify(submitedScore));
         storeScores.push(submitedScore);
         localStorage.setItem("storeScores", JSON.stringify(storeScores));
@@ -145,17 +151,15 @@ function endQuiz() {
 }
 
 viewScores.addEventListener("click", function(){
-    console.log("clicked")
     container.innerHTML = ""
     scoreContainer.prepend(h1)
     h1.textContent = "Leaderboard"
     var listItem = document.createElement("li")
-    storeScores = localStorage.getItem("storeScores")
-    for(var i = 0;i < storeScores.length; i++) {
+
+    storeScores = JSON.parse(localStorage.getItem("storeScores"))
+    storeScores.forEach(function(score){
         scoreList.appendChild(listItem);
         listItem.setAttribute("class", "score")
-        listItem.textContent = storeScores[storeScoresIndex];
-    }
-    storeScores = JSON.parse(storeScores);
-    storeScoresIndex++
+        listItem.textContent = score.initials + ":" + score.score;
+    })
 });
